@@ -1,6 +1,5 @@
 import pandas as pd
 
-# noinspection PyUnresolvedReferences
 configfile: 'config/config.yaml'
 
 SAMPLES_DF = pd.read_csv(config['samples_table'], sep='\t')
