@@ -1,7 +1,7 @@
 rule download_reference:
     output: "resources/indexes/{genome}/{genome}.fa.gz"
     log: "logs/indexes/{genome}/{genome}.fa.gz.log"
-    # as an alternative - use `bio/reference/ensembl-sequence` wrapper
+
     shell:
         "wget -O {output} http://hgdownload.soe.ucsc.edu/goldenPath/{wildcards.genome}/bigZips/{wildcards.genome}.fa.gz &> {log}"
 
