@@ -1,1 +1,26 @@
+def count(wildcards):
+    import os
+    files = []
+    for filename in os.listdir('./input'): 
+        if filename[0] != ".":
+           files.append("input/" + filename) 
+    return(files)
 
+rule all:
+    input: count
+    output: touch(".status")
+    run:
+        for f in input:
+            ff = f.replace("input/", "")       
+            res = {}
+            with open(f) as file:
+                data = str(file.read().lower())
+                test = list(set(data))
+                test.sort()
+                for i in test:
+                    res[i] = data.count(i)
+                    with open("output/"+ ff, "w") as out_file:
+                        for k, v in res.items():
+                            a = str(k) + ": " + str(v) + "\n"
+                            out_file.write(a)
+                        out_file.close()
