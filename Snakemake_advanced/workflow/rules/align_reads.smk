@@ -12,7 +12,7 @@ rule align_reads_se:
         index=lambda wildcards, input: input.indexes[0].replace(".1.bt2",""),
         extra=config['bowtie2_index']['extra']
     threads: config['bowtie2_index']['threads']
-    # Wrapper uses old 2.4.1 bowtie2, which doesn't work on my mac
+  
     conda: "../envs/bowtie.yaml"
     wrapper:
         "0.74.0/bio/bowtie2/align"
@@ -28,7 +28,7 @@ rule bam_sort:
         "benchmarks/bams_sorted/{sample}_{genome}.sorted.bam.txt",
     params:
         sort_order="coordinate",
-        # see all options: https://gatk.broadinstitute.org/hc/en-us/articles/360036510732-SortSam-Picard-
+        
         extra="VALIDATION_STRINGENCY=LENIENT CREATE_INDEX=TRUE"
     wrapper:
         "0.74.0/bio/picard/sortsam"
